@@ -1,0 +1,9 @@
+[submodule "cdui-js"]
+	path = packages/cdui-js
+	url = https://github.com/china-difi/cdui-js.git
+[submodule "packages/test/cdui-js"]
+	path = packages/test/cdui-js
+	url = https://github.com/china-difi/cdui-js.git
+[submodule "packages/cdui-js"]
+	path = packages/cdui-js
+	url = https://github.com/china-difi/cdui-js.git

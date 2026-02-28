@@ -1,0 +1,50 @@
+#header {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  z-index: 7;
+}
+
+.le-480 #header {
+  height: 54px;
+}
+
+.le-800 .sidebar-toggle {
+  display: none;
+}
+
+#header > .icon {
+  height: 100%;
+  padding: 0 12px;
+  cursor: pointer;
+}
+
+#header button {
+  width: 82px;
+  height: 40px;
+  vertical-align: top;
+}
+
+.le-800 #header > .auto-hidden {
+  display: none;
+}
+
+#header > .logo {
+  width: 144px;
+  height: 100%;
+}
+
+.le-480 #header > .logo {
+  width: 100px;
+}
+
+.le-480 #header button {
+  width: 64px;
+  height: 32px;
+  font-size: 12px;
+  font-weight: normal;
+}

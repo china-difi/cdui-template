@@ -1,0 +1,78 @@
+#menu {
+  position: absolute;
+  width: 62px;
+  height: 100%;
+  overflow: scroll;
+  transition: width 0.1s linear;
+  z-index: 1;
+}
+
+#menu:hover,
+.sidebar-expanded #menu {
+  width: 260px;
+}
+
+.menu-leaf {
+  display: flex;
+  align-items: center;
+  height: 36px;
+  white-space: nowrap;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.menu-leaf.selected {
+  background: linear-gradient(90deg, #1b2e28 0%, #1a242c 100%);
+}
+
+.menu-leaf-text {
+  width: 100px;
+  white-space: nowrap;
+  visibility: hidden;
+  transition: transform 0.1s linear;
+}
+
+.menu-leaf:hover .menu-leaf-text {
+  transform: translateX(4px);
+}
+
+.menu-leaf-toggle {
+  height: 100% !important;
+  margin-right: -6px;
+  padding: 0 6px;
+  visibility: hidden;
+  will-change: transform;
+  transition: transform 0.2s linear;
+}
+
+#menu:hover .menu-leaf-text,
+#menu:hover .menu-leaf-toggle,
+.sidebar-expanded .menu-leaf-text,
+.sidebar-expanded .menu-leaf-toggle {
+  visibility: visible;
+}
+
+.menu-node {
+  position: relative;
+  overflow: hidden;
+  will-change: height;
+  transition: height 0.2s linear;
+}
+
+.menu-node.collapsed {
+  /* 必须设置菜单收拢时的高度 */
+  height: 36px;
+}
+
+.sidebar-collapsed .menu-line {
+  display: none;
+}
+
+#menu:hover .menu-line {
+  display: block;
+}
+
+#menu:hover .menu-items,
+.sidebar-expanded .menu-items {
+  padding-left: 36px;
+}

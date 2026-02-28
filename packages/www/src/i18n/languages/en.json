@@ -1,0 +1,10 @@
+{
+  "Header": {
+    "Login": "登录",
+    "Signup": "注册"
+  },
+  "Menu": {
+    "Home": "主页",
+    "Language": "语言：中文"
+  }
+}

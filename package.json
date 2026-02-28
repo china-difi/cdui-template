@@ -1,0 +1,35 @@
+{
+  "name": "china-difi-template",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "pnpm --filter www dev",
+    "build": "pnpm --filter www build",
+    "build:pre": "pnpm --filter www build:pre",
+    "icons": "pnpm --filter www icons",
+    "css": "pnpm --filter www css",
+    "ssr:pre": "pnpm --filter ssr build:pre",
+    "ssr:build": "pnpm --filter ssr build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "@vitejs/plugin-legacy": "7.2.1",
+    "eslint": "^9.39.3",
+    "eslint-plugin-security": "^3.0.1",
+    "solid-js": "^1.9.11",
+    "terser": "^5.46.0",
+    "typescript": "~5.6.3",
+    "vite": "^5.4.21"
+  },
+  "lint-staged": {
+    "**/*.{ts,tsx,vue}": [
+      "prettier --write",
+      "git add"
+    ]
+  }
+}
