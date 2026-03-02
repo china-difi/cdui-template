@@ -7,6 +7,9 @@
     "dev": "vite --config vite.config.ts",
     "build": "vite build --config vite.config.ts --mode production",
     "build:pre": "vite build --config vite.config.ts --mode pre",
+    "ssr:dev": "vite build --ssr ssr/render.ts --config vite.ssr.config.ts --mode development && node ssr/build.js",
+    "ssr:pre": "vite build --ssr ssr/render.ts --config vite.ssr.config.ts --mode pre && node ssr/build.js",
+    "ssr": "vite build --ssr ssr/server.ts --config vite.ssr.config.ts --mode production && node ssr/build.js",
     "icons": "npx tsx icons/build.ts",
     "css": "npx tsx css/build.ts"
   },
@@ -14,5 +17,11 @@
     "cdui-js": "^1.0.1"
   },
   "devDependencies": {
+    "@types/express": "^5.0.0",
+    "commander": "^12.1.0",
+    "express": "^4.21.2",
+    "html-minifier": "^4.0.0",
+    "solid-js": "^1.9.11",
+    "terser": "^5.46.0"
   }
 }

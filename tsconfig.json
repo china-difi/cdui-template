@@ -44,7 +44,7 @@
     "**/*.ts",
     "**/*.tsx",
     "**/*.d.ts"
-  ],
+, "packages/www/ssr/build.js", "packages/www/ssr/server.js"  ],
   // 从编译中排除的文件列表
   "exclude": [
     "node_modules",
