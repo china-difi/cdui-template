@@ -11,7 +11,12 @@
     "ssr:pre": "pnpm --filter www ssr:pre",
     "ssr": "pnpm --filter www ssr",
     "icons": "pnpm --filter www icons",
-    "css": "pnpm --filter www css"
+    "css": "pnpm --filter www css",
+    "admin:dev": "pnpm --filter admin dev",
+    "admin:build": "pnpm --filter admin build",
+    "admin:build:pre": "pnpm --filter admin build:pre",
+    "admin:icons": "pnpm --filter admin icons",
+    "admin:css": "pnpm --filter admin css"
   },
   "keywords": [],
   "author": "",
