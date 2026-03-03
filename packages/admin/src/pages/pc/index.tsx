@@ -11,19 +11,19 @@ import { HomePage } from '../all/home';
  */
 const routes = [
   {
+    id: 'home',
     path: '/',
     component: HomePage,
-    keepalive: 'home',
   },
   {
+    id: 'page1',
     path: '/page1.html',
     component: NotFound,
-    keepalive: 'm-page1',
   },
   {
+    id: 'page2',
     path: '/page2.html',
     component: NotFound,
-    keepalive: 'm-page2',
   },
 ];
 
