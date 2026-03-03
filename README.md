@@ -1,7 +1,7 @@
 本项目从`cdui-js-template`模板 https://github.com/china-difi/mui-template/archive/refs/heads/main.zip 下载构建。
 
-> 本项目依赖`cdui-js`，要更新`cdui-js`请在项目根目录下执行命令`pnpm update`
-> 响应式编程请参考`cdui-js`项目 https://github.com/china-difi/mui 相关文档。
+> 本项目依赖`cdui-js`，要更新`cdui-js`请在项目根目录下执行命令`pnpm update --recursive`
+> 响应式编程请参考`cdui-js`项目 https://github.com/china-difi/cdui-js 相关文档。
 
 
 # 开始
@@ -16,47 +16,56 @@
 
 # 目录结构
 
-本项目使用`pnpm`进行多子项目管理，可根据需要添加子项目，相关问题请参阅`pnpm`文档。
+本项目使用`pnpm`进行多子项目管理，可根据需要添加子项目或命令，相关问题请参阅`pnpm`文档。
 
 <pre>
-├─ .vscode  // vscode 项目文件
-├─ dist     // 构建生成目录
-├─ packages // pnpm 项目包目录
-│   ├─ ssr  // 服务端渲染项目目录
-│   └─ www  // 网站项目目录
+├─ .vscode        // vscode 项目文件
+├─ dist           // 构建生成目录
+├─ packages       // pnpm 项目包目录
+│   ├─ admin      // 管理者后台主目录
+│   │   └─ ...    // 除不支持 ssr 服务端渲染外，与 www 基本一致
+│   └─ www        // 网站主目录
 │       ├─ css        // css 规范及构建目录
 │       ├─ icons      // 图标文件目录
+│       ├─ mock       // 模拟数据目录
 │       ├─ public     // 静态文件目录
 │       ├─ src        // 源码目录
-│       │   ├─ CandlestickChart   // K 线图组件目录
-│       │   ├─ api    // api 服务接口目录
-│       │   ├─ components // 组件目录
-│       │   ├─ css    // css 文件目录
-│       │   ├─ i18n   // 国际化多语言配置目录
-│       │   ├─ lib    // 基础功能库目录
-│       │   ├─ mock   // 模拟数据目录
-│       │   ├─ pages  // 页面目录
-│       │   ├─ ssr    // 服务端渲染配置目录
-│       │   ├─ types  // 基础类型目录
+│       │   ├─ CandlestickChart     // K 线图组件目录
+│       │   ├─ api                  // api 服务接口目录
+│       │   ├─ components           // 组件目录
+│       │   ├─ css                  // css 文件目录
+│       │   ├─ i18n                 // 国际化多语言配置目录
+│       │   ├─ lib                  // 基础功能库目录
+│       │   ├─ pages                // 页面目录
+│       │   ├─ types                // 基础类型目录
 │       │   ├─ http-interceptor.ts  // http 拦截器
-│       │   └─ main.tsx   // 应用入口文件
-│       ├─ env.xxx        // 相应环境的环境配置文件
-│       └─ index.html     // 网页入口文件
-├─ pnpm-workspace.yaml    // pnpm 多项目管理配置文件
-└─ tsconfig.json          // typescript 配置文件
+│       │   └─ main.tsx             // 应用入口文件
+│       ├─ ssr                      // 服务端渲染目录
+│       │   ├─ build.js             // 构建后处理（构建命令自动调用）
+│       │   ├─ i18n.ts              // 国际化语言配置
+│       │   ├─ render.ts            // 服务端渲染（需根据业务修改 pages 以控制需要渲染的页面）
+│       │   └─ server.ts            // 服务端渲染服务（按每一种语言开启一个线程的方式执行 render.ts 进行并发渲染）
+│       ├─ env.xxx                  // 相应环境的环境配置文件
+│       ├─ index.html               // 网页入口文件
+│       ├─ vite.config.ts           // vite 构建配置
+│       └─ vite.ssr.config.ts       // vite 服务端渲染构建配置
+├─ pnpm-workspace.yaml  // pnpm 多项目管理配置文件
+└─ tsconfig.json        // typescript 配置文件
 </pre>
 
 
-# 样式规范
+# 样式规范及构建
 
-从`UI`设计开始需严格遵循样式规范设计及编写代码，除特殊情况外不允许出现样式规范之外的设计及代码。
+从`UI`设计开始需严格遵循样式规范设计及编写代码，除特殊情况外不允许出现样式规范之外的设计及代码，通用样式由`UI`维护，前端根据`UI`维护的`css.md`文件执行`npm run css`命令同步更新样式。
 
-以`www`项目为例，`www/css`目录下有两个文件：
+以`www`项目为例，其`www/css`目录下有两个文件：
 
-1. build.ts  css 样式构建脚本文件，负责根据当前目录下的`css.md`文件内容自动构建 css 样式
+1. build.ts  css 样式构建脚本文件，负责根据当前目录下的`css.md`文件内容自动更新 css 样式
 2. css.md  css 样式规范配置文件（由`UI`维护）
 
-构建后会在生成原子样式文件`www/src/css/atomic.css`，根据`css.md`文件内容大致可以生成以下几类：
+成功构建后会替换项目目录下的样式文件`www/src/css/atomic.css`。
+
+根据`css.md`文件内容大致可以生成以下几类：
 
 <table>
   <tr>
@@ -207,24 +216,73 @@
   </tr>
 </table>
 
-
 > 组件样式标准待补充
 > UI 项目中还有一些标准的原子样式，可参考相应源码，此处略
 
-当`css.md`文件更新后，可重新执行脚本自动更新相应样式，响应式及换肤在`css.md`文件中由`UI`进行维护，开发者无须关注。
+当`css.md`文件更新后，前端相应负责人在`UI`修改了`css.md`后需执行此命令同步更新相应样式。
 
-`www`项目构建样式命令为`npm run css`，前端相应负责人在`UI`修改了`css.md`后需执行此命令同步生成相应样式。其它项目可配置相应命令以实现类似功能。
+非特殊情况，开发者必须使用通用样式中定义的`class`编写程序，开发者无需关注通用样式的响应工及换肤问题，统一由`UI`进行管理。
+
+
+## 自适应及换肤原理
+
+在项目的`index.html`文件中，有一段脚本会自动根据当前窗口自动根据窗口宽度的临界值生成一系统的`class`，比如默认临界值为`[1920, 1280, 1024, 800, 640, 480]`，则脚本代码会给每个临界值生成`4`个`classs`，以`1920`为例：
+
+|class|备注|
+|----|----|
+|.lt-1920|当前页面宽度小于1920像素|
+|.le-1920|当前页面宽度小于等于1920像素|
+|.gt-1920|当前页面宽度大于1920像素|
+|.ge-1920|当前页面宽度大于等于1920像素|
+
+比如某`div`样式在页面宽度小于`800`像素时生效:
+
+```css
+.lt-800 div {
+  ...
+}
+```
+
+换肤也是类似的，由开发人员在更换皮肤时生成相应的`class`即可，比如切换为`黑暗`模板，写端人员需要`body`节点增加名为`dark`的`class`，`UI`设计或开发者即可使用这个`class`实现换肤。
+
+## `UI`设计人员的自适应及换肤配置
+
+根据`css.md`文档规范，`#`开头表示样式大类，在样式大类下可增加`class`前缀实现自适应及换肤。比如以下`css.md`配置表示在页面宽度小于等于`800`时`.margin`从`16px`自适应为`14px`，背景色在`dark`模式下变为`#1E252A`。
+
+```md
+
+# margin 外边距
+
+.margin: 16px;
+
++ .le-800 
+
+.margin: 14px;
+
+# background-color 背景颜色
+
+.bg-c: #f0f0f0;
+
++ .dark
+
+.bg-c: #1E252A;
+```
+
+
+## 开发者自定义自适应及换肤实现
+
+特殊场景开发者可使用相应的`class`写`css`代码来控制自适应或换肤。
 
 
 # 图标
 
 本项目图标以目录的形式组织`svg`图标文件，可随意定义子目录，但最后生成的图标名与图标文件名一致，比如图标文件`logo.svg`，无论放到哪个目录下，最终`Icon`组件的`name`都使用`logo`来指定`logo.svg`图标。
 
-以`www`项目为例，项目目录下的`icons`为图标文件目录，其下的`build.ts`为图标目录构建脚本，可根据需要修改此构建脚本生成图标文件。
+以`www`项目为例，`icons`目录为图标文件目录，`icons/build.ts`为图标构建脚本，可根据需要修改此构建脚本生成图标文件。
 
-默认情况下，构建脚本会把`svg`图标直接生成到`index.html`文件中，如果有按需加载的图标，可修改`icons/build.ts`构建脚本生成图标模块，然后在代码中使用按需加载的方式加载生成的图标模块。
+默认情况下，构建脚本会把`svg`图标直接生成到`index.html`文件中，如果有按需加载的图标，可修改`icons/build.ts`构建脚本使用`saveIconsModule`方法生成图标模块文件，然后在代码中使用按需加载的方式按需创建相应图标。
 
-`www`项目构建图标命令为`npm run icons`，前端相应负责人在图标发生变化后修改`icons/build.ts`后需构建脚本并执行此命令同步更新图标。其它项目可配置相应命令以实现类似功能。
+`www`项目构建图标命令为`npm run icons`，前端相应负责人在图标目录发生变化后同步修改`icons/build.ts`构建脚本并执行此命令同步更新图标。
 
 
 # 国际化
@@ -245,7 +303,7 @@ const Market = Menu.Market;
 
 项目目录下的`src/api`子目录为后台`API`调用目录，所有后台接口的调用与前后端数据转换代码必需放在此目录中。
 
-当环境变量中配置了`VITE_API_MOCK`时，则启用模拟数据支持。项目目录下的`src/mock`子目录为模拟数据配置目录，其中`mock-data`要模拟`API`接口数据。其规则与`api`接口路径一致，比如`api`接口路径为`api/my/settings`，则相应的模拟数据文件为`mock-data/my/settings.josn`，如果不一致，则模拟数据不会生效。
+当环境变量中配置了`VITE_API_MOCK`时，则启用模拟数据支持。项目目录下的`mock`子目录为模拟数据配置目录，其中`mock-data`目录下的文件即要模拟`API`接口数据。其规则与`api`接口路径一致，比如`api`接口路径为`api/my/settings`，则相应的模拟数据文件为`mock-data/my/settings.josn`，如果不一致，则模拟数据不会生效。
 
 增加或禁用模拟数据需修改`src/mock/index.ts`文件：
 
