@@ -20,7 +20,7 @@ const program = new Command();
 // 设置程序的版本号
 program.version('0.0.1');
 
-program.option('-m --mode [mode]', '渲染模式 jenkins server', 'jenkins');
+program.option('-m --mode [mode]', '渲染模式 build server', 'build');
 program.option('-p --port [port]', '侦听端口号', '8088');
 program.option('-r --root [root]', 'www静态文件根目录 "./"开头表示相对路径', '../www');
 
@@ -112,7 +112,7 @@ const execute = (template) => {
   });
 };
 
-if (mode === 'jenkins') {
+if (mode === 'build') {
   try {
     let template = loadTemplate();
 

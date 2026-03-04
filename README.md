@@ -13,6 +13,8 @@
 * 构建命令：`npm run build[:环境]`
 * `SSR`构建：`npm run ssr[:环境]`，然后执行执行`dist/ssr/server.js`渲染页面或启动服务（参数：--root www根目录, --mode: 渲染模式 "jenkins" | "server"，--port: 侦听端口，server mode时有效）
 
+> 可根据`pnpm`规范在根目录下的`package.json`文件中的`scripts`处配置相应的命令以便在根目录下执行，后述的命令特指在相应子项目下执行的命令。
+
 
 # 目录结构
 
@@ -282,7 +284,7 @@
 
 默认情况下，构建脚本会把`svg`图标直接生成到`index.html`文件中，如果有按需加载的图标，可修改`icons/build.ts`构建脚本使用`saveIconsModule`方法生成图标模块文件，然后在代码中使用按需加载的方式按需创建相应图标。
 
-`www`项目构建图标命令为`npm run icons`，前端相应负责人在图标目录发生变化后同步修改`icons/build.ts`构建脚本并执行此命令同步更新图标。
+构建图标命令为`npm run icons`，前端相应负责人在图标目录发生变化后需同步修改`icons/build.ts`构建脚本并执行此命令以同步更新图标。
 
 
 # 国际化
@@ -316,3 +318,18 @@ const modules = import.meta.glob([
   import: 'default', // 导入默认导出（JSON 文件默认导出的就是整个对象）
 });
 ```
+
+
+# 服务端渲染
+
+项目目录下的`ssr`子目录为服务端渲染目录，`vite.ssr.config.ts`文件为服务端渲染构建配置文件。
+
+`ssr/i18n.ts`为国际化支持的语言集合，可根据需要修改。
+`ssr/server.ts`文件为服务端渲染的服务程序，默认可根据参数设置为一次构建或启动`http`构建服务，默认一种语言开启一个渲染线程，可根据需要自行修改。
+`ssr/render.ts`为实际的渲染代码，服务程序给每一种语言创建一个`render.ts`线程进行渲染，其中可配置`pages`属性以定制需要渲染的页面。
+
+执行命令`npm run ssr[:环境]`构建服务端渲染代码，执行前记得先执行`npm run build[:环境]`先构建相应项目。
+构建成功后，默认会在根目录下生成`dist/ssr`子目录。
+
+以`build`的方式执行`dist/ssr/server.js`（需先执行命令`npm i`安装依赖包），成功则在`dist/www/ssr`生成服务端渲染页面。
+
