@@ -1,4 +1,4 @@
-import { listenAutoCloseEvent, layout, KeepAlive } from 'cdui-js';
+import { layout, KeepAlive } from 'cdui-js';
 
 // 引入 API MOCK
 import '../../mock';
@@ -8,7 +8,7 @@ import { PCHost } from './pc';
 
 export const App = () => {
   return (
-    <div id="app" class="bg-c-XXD color font-s" {...listenAutoCloseEvent}>
+    <div id="app" class="bg-c-XXD color font-s">
       <KeepAlive show={layout['le-480']}>
         <MobileHost></MobileHost>
       </KeepAlive>

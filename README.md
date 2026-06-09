@@ -1,6 +1,6 @@
 本项目从`cdui-js-template`模板 https://github.com/china-difi/mui-template/archive/refs/heads/main.zip 下载构建。
 
-> 本项目依赖`cdui-js`，要更新`cdui-js`请在项目根目录下执行命令`pnpm update --recursive`
+> 本项目依赖`cdui-js`，要更新`cdui-js`请在项目根目录下执行命令`pnpm update -r`
 > 响应式编程请参考`cdui-js`项目 https://github.com/china-difi/cdui-js 相关文档。
 
 
@@ -11,7 +11,7 @@
 * 当前面项目的主目录下执行命令`pnpm i`安装依赖
 * 启动开发环境`npm run dev`
 * 构建命令：`npm run build[:环境]`
-* `SSR`构建：`npm run ssr[:环境]`，然后执行执行`dist/ssr/server.js`渲染页面或启动服务（参数：--root www根目录, --mode: 渲染模式 "jenkins" | "server"，--port: 侦听端口，server mode时有效）
+* `SSR`构建：`npm run ssr[:环境]`，然后执行`dist/ssr/server.js`渲染页面或启动服务（参数：--root www根目录, --mode: 渲染模式 "build" | "server"，--port: 侦听端口）
 
 > 可根据`pnpm`规范在根目录下的`package.json`文件中的`scripts`处配置相应的命令以便在根目录下执行，后述的命令特指在相应子项目下执行的命令。
 
@@ -332,4 +332,3 @@ const modules = import.meta.glob([
 构建成功后，默认会在根目录下生成`dist/ssr`子目录。
 
 以`build`的方式执行`dist/ssr/server.js`（需先执行命令`npm i`安装依赖包），成功则在`dist/www/ssr`生成服务端渲染页面。
-

@@ -14,14 +14,14 @@
     "css": "npx tsx css/build.ts"
   },
   "dependencies": {
-    "cdui-js": "^1.0.1"
+    "cdui-js": "^1.0.29"
   },
   "devDependencies": {
-    "@types/express": "^5.0.0",
+    "@types/express": "^5.0.6",
     "commander": "^12.1.0",
-    "express": "^4.21.2",
+    "express": "^4.22.2",
     "html-minifier": "^4.0.0",
-    "solid-js": "^1.9.11",
-    "terser": "^5.46.0"
+    "solid-js": "^1.9.13",
+    "terser": "^5.48.0"
   }
 }

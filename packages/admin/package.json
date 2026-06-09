@@ -11,10 +11,10 @@
     "css": "npx tsx css/build.ts"
   },
   "dependencies": {
-    "cdui-js": "^1.0.1"
+    "cdui-js": "^1.0.29"
   },
   "devDependencies": {
-    "solid-js": "^1.9.11",
-    "terser": "^5.46.0"
+    "solid-js": "^1.9.13",
+    "terser": "^5.48.0"
   }
 }

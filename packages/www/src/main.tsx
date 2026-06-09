@@ -1,9 +1,11 @@
 import './css/all.css';
 
-import { hydrate, render } from 'cdui-js';
+import { hydrate, render, startAutoCloseEvent } from 'cdui-js';
 import { App } from './pages/App';
 
 let body = document.body;
+
+startAutoCloseEvent();
 
 // 服务端渲染
 if ((window as any)._$HY) {
